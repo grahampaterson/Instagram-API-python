@@ -25,7 +25,7 @@ try:
     from moviepy.editor import VideoFileClip
 except ImportError:
     print("Fail to import moviepy. Need only for Video upload.")
-    
+
 
 # The urllib library was split into other modules from Python 2 to Python 3
 if sys.version_info.major == 3:
@@ -304,7 +304,7 @@ class InstagramAPI:
                     except:
                         correct = False
                 try:
-                    user_id = long(user_id)
+                    user_id = int(user_id)
                     if user_id < 0:
                         correct = False
                 except:
@@ -387,7 +387,7 @@ class InstagramAPI:
             except:
                 pass
             return False
-    
+
     def direct_message(self, text, recipients):
         if type(recipients) != type([]):
             recipients = [str(recipients)]
@@ -429,7 +429,7 @@ class InstagramAPI:
         )
         #self.SendRequest(endpoint,post=data) #overwrites 'Content-type' header and boundary is missed
         response = self.s.post(self.API_URL + endpoint, data=data)
-        
+
         if response.status_code == 200:
             self.LastResponse = response
             self.LastJson = json.loads(response.text)
@@ -443,7 +443,7 @@ class InstagramAPI:
             except:
                 pass
             return False
-        
+
     def direct_share(self, media_id, recipients, text=None):
         if not isinstance(position, list):
             recipients = [str(recipients)]
